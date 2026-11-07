@@ -57,4 +57,6 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 
 ### اللي اتعلمته
 - الدقة على اختبار صغير بتضلّل، والتقييم المتقاطع `Cross-Validation` أصدق.
-- مع الأصناف غير المتوازنة، الدقة بتخبّي الفشل: لازم `Precision` و`Recall`.
+
+- مع الأصناف غير المتوازنة، الدقة بتخبّي الفشل، فلازم نقيس معاها `Precision`
+- ونقيس كمان `Recall`
