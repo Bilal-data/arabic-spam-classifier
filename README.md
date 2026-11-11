@@ -32,7 +32,7 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 ### Error analysis
 - On the first 80/20 split, 48 of 388 spam tweets were missed (12%). Missed spam is not shorter than caught spam (about 113 vs 105 characters).
 - Reading 20 missed tweets by hand: most are adult content or ads for products and services (weight loss, health products, forex trading), written like normal conversational Arabic with no classic ad phrases. This is a small manual sample, so it is a hypothesis, not a proven cause.
-- Exact duplicates: 260 extra copies (481 tweets involved), all labeled ham. Removing them changes nothing (accuracy 98.14%, spam recall 87.5%). Near-duplicates (almost identical text) were not checked.
+- Exact duplicates: 260 extra copies (481 tweets involved), all labeled ham. Removing them changes nothing (accuracy 98.14%, spam recall 87.5%). Near-duplicates (almost identical text) were not checked. Update: a rough check (grouped by the first 40 characters) is in the results table above.
 ### Limitations
 - The first dataset was tiny and hand-written; results were **unstable**.
 - The larger test used tweets (a public dataset), not SMS or email, and a single train/test split. Classes are imbalanced (about 85% ham). The 5-fold CV above shows the results are stable across splits.
@@ -59,10 +59,12 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 | تقييم مكرر 5×5 (50 رسالة) | متوسط 87.2 بالمئة | تفاوت كبير |
 | **داتا أكبر:** 13,240 تغريدة عربية (11,299 عادية / 1,941 سبام) | الدقة 98.2 بالمئة. دقة السبام `Precision` = 1.00. استرجاع السبام `Recall` = 0.ج88 | النموذج الغبي "الكل عادية" بيجيب 85.3 بالمئة دقة، وصفر بالمئة استرجاع للسبام، فالدقة لوحدها بتخدع. حوالي 48 تغريدة سبام عدّت |
 | تقييم 5-fold (Cross-Validation) على نفس الـ 13,240 تغريدة | الدقة: متوسط 98.2 بالمئة (من 98.0 لـ 98.3). استرجاع السبام: متوسط 87.4 بالمئة(من 86.6 لـ 88.1) | ثابتة بين التقسيمات. تقريبًا تغريدة سبام من كل 8 بتعدّي. |
+| تقييم 5-fold مع `class_weight="balanced"` | الدقة 99.6 بالمئة، استرجاع السبام 97.4 بالمئة، Precision السبام 99.7 بالمئة | النموذج الأصلي: 98.2 / 87.4 / 100. |
+| نفس التقييم مع منع التغريدات المتشابهة (أول 40 حرف) من الانفصال بين التدريب والاختبار | الدقة 99.4 بالمئة، استرجاع السبام 96.5 بالمئة، Precision السبام 99.7 بالمئة | الأصلي على نفس التقسيم: 98.1 / 86.9 / 100. التحسين حقيقي، والتشابه الجزئي بيضخّم النتيجة شوية بس. قارنّا إعدادين بس. |
 ### تحليل الأخطاء
 - في التقسيم الأول فات 48 من 388 تغريدة سبام (12 بالمئة). السبام اللي فات مش أقصر من اللي اتمسك (متوسط الطول حوالي 113 مقابل 105 حرف).
 - قرينا 20 تغريدة فاتت بإيدينا: أغلبها محتوى للكبار أو إعلانات منتجات وخدمات (تخسيس، علاج، فوركس)، مكتوبة بأسلوب كلام عادي من غير عبارات إعلانية واضحة. دي عيّنة صغيرة، فده تخمين مش سبب مثبت.
-- التكرار بالنص بالظبط: 260 نسخة زيادة (481 تغريدة ليها توأم)، كلهم عادية (Ham). شيلهم ما غيّرش حاجة (الدقة 98.14 بالمئة، استرجاع السبام 87.5 بالمئة). التشابه الجزئي ما اتفحصش.
+- التكرار بالنص بالظبط: 260 نسخة زيادة (481 تغريدة ليها توأم)، كلهم عادية (Ham). شيلهم ما غيّرش حاجة (الدقة 98.14 بالمئة، استرجاع السبام 87.5 بالمئة). التشابه الجزئي ما اتفحصش. تحديث: فحصناه بطريقة خشنة (أول 40 حرف)، وهو موضّح في الجدول فوق.
 ### الحدود
 - الداتا الأولى قليلة ومكتوبة يدويًا، والنتائج كانت غير مستقرة.
 - الاختبار الأكبر كان على تغريدات مش `SMS`، وبتقسيمة واحدة بس. **غير جاهز للاستخدام الفعلي**.
