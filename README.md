@@ -26,10 +26,11 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 | 5-fold cross-validation (44 messages) | mean 86.1% | Large spread, small data. |
 | 5x5 repeated stratified CV, balanced data (50 messages) | **mean 87.2%** (min 70%, max 100%) | Wide spread. Gain over 86.1% is within noise. |
 | **Larger real dataset:** 13,240 Arabic tweets (11,299 ham / 1,941 spam), 80/20 stratified split | Accuracy **98.2%**; spam precision **1.00**, spam recall **0.88** (388 spam in the 2,648-tweet test set) | A model that always says "ham" scores 85.3% accuracy with 0% spam recall, so accuracy alone is misleading. About 46 spam tweets were missed. Single split only. |
+| 5-fold stratified CV on the same 13,240 tweets | Accuracy mean **98.2%** (98.0 to 98.3); spam recall mean **87.4%** (86.6 to 88.1) | Stable across folds. About 1 in 8 spam tweets is still missed. |
 
 ### Limitations
 - The first dataset was tiny and hand-written; results were **unstable**.
-- The larger test used tweets (a public dataset), not SMS or email, and a single train/test split. Classes are imbalanced (about 85% ham).
+- The larger test used tweets (a public dataset), not SMS or email, and a single train/test split. Classes are imbalanced (about 85% ham). The 5-fold CV above shows the results are stable across splits.
 - Not production-ready.
 
 ### What I learned
