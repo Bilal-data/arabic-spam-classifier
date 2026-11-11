@@ -25,9 +25,12 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 | 10 new "harder" messages (dialect, new phrasing) | 70% | Errors were normal messages labeled spam. |
 | 5-fold cross-validation (44 messages) | mean 86.1% | Large spread, small data. |
 | 5x5 repeated stratified CV, balanced data (50 messages) | **mean 87.2%** (min 70%, max 100%) | Wide spread. Gain over 86.1% is within noise. |
-| **Larger real dataset:** 13,240 Arabic tweets (11,299 ham / 1,941 spam), 80/20 stratified split | Accuracy **98.2%**; spam precision **1.00**, spam recall **0.88** (388 spam in the 2,648-tweet test set) | A model that always says "ham" scores 85.3% accuracy with 0% spam recall, so accuracy alone is misleading. About 46 spam tweets were missed. Single split only. |
+| **Larger real dataset:** 13,240 Arabic tweets (11,299 ham / 1,941 spam), 80/20 stratified split | Accuracy **98.2%**; spam precision **1.00**, spam recall **0.88** (388 spam in the 2,648-tweet test set) | A model that always says "ham" scores 85.3% accuracy with 0% spam recall, so accuracy alone is misleading. About 48 spam tweets were missed. Single split only. |
 | 5-fold stratified CV on the same 13,240 tweets | Accuracy mean **98.2%** (98.0 to 98.3); spam recall mean **87.4%** (86.6 to 88.1) | Stable across folds. About 1 in 8 spam tweets is still missed. |
-
+### Error analysis
+- On the first 80/20 split, 48 of 388 spam tweets were missed (12%). Missed spam is not shorter than caught spam (about 113 vs 105 characters).
+- Reading 20 missed tweets by hand: most are adult content or ads for products and services (weight loss, health products, forex trading), written like normal conversational Arabic with no classic ad phrases. This is a small manual sample, so it is a hypothesis, not a proven cause.
+- Exact duplicates: 260 extra copies (481 tweets involved), all labeled ham. Removing them changes nothing (accuracy 98.14%, spam recall 87.5%). Near-duplicates (almost identical text) were not checked.
 ### Limitations
 - The first dataset was tiny and hand-written; results were **unstable**.
 - The larger test used tweets (a public dataset), not SMS or email, and a single train/test split. Classes are imbalanced (about 85% ham). The 5-fold CV above shows the results are stable across splits.
@@ -52,7 +55,7 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 | تقسيم واحد 70/30 (9 رسايل) | 100 بالمئة | عدد قليل جدًا |
 | 10 رسايل أصعب | 70 بالمئة | أخطاء: عادية اتصنّفت سبام |
 | تقييم مكرر 5×5 (50 رسالة) | متوسط 87.2 بالمئة | تفاوت كبير |
-| **داتا أكبر:** 13,240 تغريدة عربية (11,299 عادية / 1,941 سبام) | الدقة 98.2 بالمئة. دقة السبام `Precision` = 1.00. استرجاع السبام `Recall` = 0.ج88 | النموذج الغبي "الكل عادية" بيجيب 85.3 بالمئة دقة، وصفر بالمئة استرجاع للسبام، فالدقة لوحدها بتخدع. حوالي 46 تغريدة سبام عدّت |
+| **داتا أكبر:** 13,240 تغريدة عربية (11,299 عادية / 1,941 سبام) | الدقة 98.2 بالمئة. دقة السبام `Precision` = 1.00. استرجاع السبام `Recall` = 0.ج88 | النموذج الغبي "الكل عادية" بيجيب 85.3 بالمئة دقة، وصفر بالمئة استرجاع للسبام، فالدقة لوحدها بتخدع. حوالي 48 تغريدة سبام عدّت |
 | تقييم 5-fold (Cross-Validation) على نفس الـ 13,240 تغريدة | الدقة: متوسط 98.2 بالمئة (من 98.0 لـ 98.3). استرجاع السبام: متوسط 87.4 بالمئة(من 86.6 لـ 88.1) | ثابتة بين التقسيمات. تقريبًا تغريدة سبام من كل 8 بتعدّي. |
 
 ### الحدود
