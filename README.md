@@ -27,6 +27,8 @@ Built as part of my machine-learning learning path, using Python in Google Colab
 | 5x5 repeated stratified CV, balanced data (50 messages) | **mean 87.2%** (min 70%, max 100%) | Wide spread. Gain over 86.1% is within noise. |
 | **Larger real dataset:** 13,240 Arabic tweets (11,299 ham / 1,941 spam), 80/20 stratified split | Accuracy **98.2%**; spam precision **1.00**, spam recall **0.88** (388 spam in the 2,648-tweet test set) | A model that always says "ham" scores 85.3% accuracy with 0% spam recall, so accuracy alone is misleading. About 48 spam tweets were missed. Single split only. |
 | 5-fold stratified CV on the same 13,240 tweets | Accuracy mean **98.2%** (98.0 to 98.3); spam recall mean **87.4%** (86.6 to 88.1) | Stable across folds. About 1 in 8 spam tweets is still missed. |
+| `class_weight="balanced"`, same 5-fold CV | Accuracy 99.6%, spam recall 97.4%, spam precision 99.7% | Default model: 98.2% / 87.4% / 100%. |
+| Same, keeping near-duplicate tweets in one fold (grouped by first 40 characters) | Accuracy 99.4%, spam recall 96.5%, spam precision 99.7% | Default model on the same split: 98.1% / 86.9% / 100%. The gain is real; near-duplicates inflate scores only slightly. Only 2 configurations were compared, so a small optimism remains. |
 ### Error analysis
 - On the first 80/20 split, 48 of 388 spam tweets were missed (12%). Missed spam is not shorter than caught spam (about 113 vs 105 characters).
 - Reading 20 missed tweets by hand: most are adult content or ads for products and services (weight loss, health products, forex trading), written like normal conversational Arabic with no classic ad phrases. This is a small manual sample, so it is a hypothesis, not a proven cause.
