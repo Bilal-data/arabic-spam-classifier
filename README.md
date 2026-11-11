@@ -9,6 +9,8 @@
 A small end-to-end NLP project that classifies short Arabic text messages as **spam** or **ham** (normal).
 Built as part of my machine-learning learning path, using Python in Google Colab.
 
+**Notebook:** [arabic_spam_classifier.ipynb](arabic_spam_classifier.ipynb) (the 13,240-tweet experiments, with outputs)
+
 ### Pipeline
 1. **Data:** 50 hand-written Arabic messages (25 spam, 25 ham, balanced), including some Egyptian-dialect examples. Later tested on a public dataset of 13,240 Arabic tweets.
 2. **Preprocessing:** remove Arabic diacritics (tashkeel), normalize alef variants, tokenize with NLTK.
